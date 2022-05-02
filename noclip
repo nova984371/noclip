@@ -1,4 +1,3 @@
-TextButton_6.MouseButton1Click:Connect(function()
     local Character = player.Character
     local Humanoid = Character:FindFirstChildWhichIsA('Humanoid')
     local Control = false
@@ -36,4 +35,3 @@ TextButton_6.MouseButton1Click:Connect(function()
             end;
         end;
     end);	
-end)
