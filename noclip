@@ -1,17 +1,39 @@
-noclip = false
-game:GetService('RunService').Stepped:connect(function()
-if noclip then
-game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
-end
+TextButton_6.MouseButton1Click:Connect(function()
+    local Character = player.Character
+    local Humanoid = Character:FindFirstChildWhichIsA('Humanoid')
+    local Control = false
+    local loopFunction = function()
+        Humanoid:ChangeState(11)
+    end;
+    local Loop
+    local Start = function()
+        if Control == false then
+            Loop = game:GetService("RunService").Heartbeat:Connect(loopFunction);
+        end
+    end;
+    local Ended = function()
+        if Control == true then
+            Humanoid:ChangeState(OldState)
+        end
+    end;
+    Start()	
+    local Pause = function()
+        Loop:Disconnect()
+    end;
+    local Pause2 = function()
+        Start();
+        Loop2:Disconnect()
+    end;
+    UIS.InputBegan:Connect(function(a, b)
+        if a.KeyCode == Enum.KeyCode.Z and not b then
+            if Control == false then
+            	Control = true;
+            	Ended();
+            	Pause();
+            elseif Control == true then
+            	Control = false;
+            	Pause2();
+            end;
+        end;
+    end);	
 end)
-plr = game.Players.LocalPlayer
-mouse = plr:GetMouse()
-mouse.KeyDown:connect(function(key)
- 
-if key == "e" then
-noclip = not noclip
-game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
-end
-end)
-print('Loaded')
-print('Press "E" to noclip')
